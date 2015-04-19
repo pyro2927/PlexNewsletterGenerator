@@ -1,0 +1,13 @@
+<tr width="100%">
+  <td width="200">
+    <!-- poster image -->
+    <img class="featurette-image img-responsive pull-left" src="<%= PosterFetcher.poster_for(movie) %>" width="154">
+  </td>
+  <td>
+    <h2 class="featurette-heading"><a target="_blank" style="color: #000000;" href="http://plex.tv/web/app#!/server/b39edc1e62a774dcb97b5012413e44a4f425b8e4/details/<%= movie.key.gsub("/", "%2F") %>"><%= "#{movie.title} (#{movie.year})" %></a></h2>
+    <h4><%= movie.tagline if movie.respond_to?(:tagline) %></h4>
+    <!-- movie text -->
+    <p class="lead"><i>Length: <%= movie.duration.to_i / 60000 %> minutes</i></p>
+    <p class="lead"><%= movie.summary.split("\n").first %></p>
+  </td>
+</tr>

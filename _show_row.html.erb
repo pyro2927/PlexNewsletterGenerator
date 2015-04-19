@@ -1,0 +1,13 @@
+<tr width="100%">
+  <td width="200">
+    <!-- poster image -->
+    <img class="featurette-image img-responsive pull-left" src="<%= PosterFetcher.poster_for(episode) %>" width="154">
+  </td>
+  <td>
+    <h2 class="featurette-heading"><a target="_blank" style="color: #000000;" href="http://plex.tv/web/app#!/server/b39edc1e62a774dcb97b5012413e44a4f425b8e4/details/<%= episode.key.gsub("/", "%2F") %>"><%= episode.grandparent_title %></a></h2>
+    <!-- movie text -->
+    <h4><%= episode.title %></h4>
+    <p><i>Aired <%= Date.parse(episode.originally_available_at).strftime('%A, %B %-d, %Y') %></i></p>
+    <p class="lead"><%= episode.summary %></p>
+  </td>
+</tr>
