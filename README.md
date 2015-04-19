@@ -12,6 +12,8 @@ Now you can generate and send weekly Plex emails with just two commands!
     $ rake email:generate
     $ rake email:send
 
+![](./screenshot.png)
+
 ## General Info
 
 ### email:generate
