@@ -6,6 +6,7 @@ This is greatly inspired by jakewaldron's [PlexEmail](https://github.com/jakewal
   * The configuration/settings of PlexEmail seemed too complex and over the top
   * A smaller feature set felt easier to manage
   * I didn't want to worry about uploading movie posters to imgur
+  * I wanted to run my email generator remotely
 
 Now you can generate and send weekly Plex emails with just two commands!
 
