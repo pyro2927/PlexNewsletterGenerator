@@ -9,6 +9,8 @@ require 'tvdb_party'
 
 Dotenv.load
 
+@title = ENV['TITLE'] || 'Plex Weekly'
+
 Plex.configure do |config|
   config.auth_token = ENV['PLEX_TOKEN']
 end
@@ -44,8 +46,12 @@ namespace :email do
     # fetch some recently added content
     movie_section = server.library.section(ENV['PLEX_MOVIE_SECTION'])
     tv_section = server.library.section(ENV['PLEX_TV_SECTION'])
-    newest_movies = movie_section.recently_added[0..3]
-    newest_shows = tv_section.newest[0..3]
+
+    last_sunday = DateTime.now - DateTime.now.wday
+    newest_movies = movie_section.recently_added
+    newest_movies.select! {|m| Time.at(m.added_at.to_i).to_datetime >= last_sunday }
+    newest_shows = tv_section.newest
+    newest_shows.select! {|s| Date.parse(s.originally_available_at) >= last_sunday }
 
     potw = movie_section.all.detect { |m| m.title =~ /#{ENV['POTW']}/i }
 
@@ -56,7 +62,7 @@ namespace :email do
     ENV['EMAILS'].split(" ").each do |address|
       puts "Sending email to #{address}..."
       Pony.mail({
-         subject: "Plex Weekly",
+         subject: @title,
          from: ENV['FROM_EMAIL'],
          html_body: File.read('rendered.html'),
          to: address,
